@@ -78,7 +78,6 @@
 #include "wam_srvs/GravityComp.h"
 #include "wam_srvs/HapticSphere.h"
 #include "wam_srvs/Hold.h"
-#include "wam_srvs/HoldGains.h"
 #include "wam_srvs/JointMove.h"
 #include "wam_srvs/JointMoveBlock.h"
 #include "wam_srvs/PoseMove.h"
@@ -366,40 +365,44 @@ template<size_t DOF>
 		bool disconnectSystems(std_srvs::Empty::Request &req, std_srvs::Empty::Response &res);
 		bool joyForceTorqueBase(wam_srvs::ForceTorque::Request &req, wam_srvs::ForceTorque::Response &res);
 		bool joyForceTorqueTool(wam_srvs::ForceTorque::Request &req, wam_srvs::ForceTorque::Response &res);
+
+		bool jpPIDControl(wam_srvs::JP_PID::Request &req, wam_srvs::JP_PID::Response &res);
+		bool jvPIDControl(wam_srvs::JV_PID::Request &req, wam_srvs::JV_PID::Response &res);
+		bool tpPIDControl(wam_srvs::TP_PID::Request &req, wam_srvs::TP_PID::Response &res);
 		bool hapticSphere(wam_srvs::HapticSphere::Request &req, wam_srvs::HapticSphere::Response &res);
 		bool gravity(wam_srvs::GravityComp::Request &req, wam_srvs::GravityComp::Response &res);
 		bool goHome(std_srvs::Empty::Request &req, std_srvs::Empty::Response &res);
 		bool holdJPos(wam_srvs::Hold::Request &req, wam_srvs::Hold::Response &res);
-		bool holdCPos(wam_srvs::HoldGains::Request &req, wam_srvs::HoldGains::Response &res);
-		bool holdOrtn(wam_srvs::HoldGains::Request &req, wam_srvs::HoldGains::Response &res);
+		bool holdCPos(wam_srvs::Hold::Request &req, wam_srvs::Hold::Response &res);
+		bool holdOrtn(wam_srvs::Hold::Request &req, wam_srvs::Hold::Response &res);
 		bool holdOrtn2(wam_srvs::Hold::Request &req, wam_srvs::Hold::Response &res);
 		bool jointMove(wam_srvs::JointMove::Request &req, wam_srvs::JointMove::Response &res);
 		bool jointMoveBlock(wam_srvs::JointMoveBlock::Request &req, wam_srvs::JointMoveBlock::Response &res);
-		// bool poseMove(wam_srvs::PoseMove::Request &req, wam_srvs::PoseMove::Response &res);
-		// bool cartMove(wam_srvs::CartPosMove::Request &req, wam_srvs::CartPosMove::Response &res);
-		// bool cartVel(wam_srvs::CartVel::Request &req, wam_srvs::CartVel::Response &res);
-		// bool ortnMove(wam_srvs::OrtnMove::Request &req, wam_srvs::OrtnMove::Response &res);
+		bool poseMove(wam_srvs::PoseMove::Request &req, wam_srvs::PoseMove::Response &res);
+		bool cartMove(wam_srvs::CartPosMove::Request &req, wam_srvs::CartPosMove::Response &res);
+		bool cartVel(wam_srvs::CartVel::Request &req, wam_srvs::CartVel::Response &res);
+		bool ortnMove(wam_srvs::OrtnMove::Request &req, wam_srvs::OrtnMove::Response &res);
 		bool ortnSplitMove(wam_srvs::OrtnSplitMove::Request &req, wam_srvs::OrtnSplitMove::Response &res);
-		// bool forceTorqueBase(wam_srvs::ForceTorqueBase::Request &req, wam_srvs::ForceTorqueBase::Response &res);
-		// bool forceTorqueTool(wam_srvs::ForceTorqueTool::Request &req, wam_srvs::ForceTorqueTool::Response &res);
-		// bool forceTorqueToolTime(wam_srvs::ForceTorqueToolTime::Request &req, wam_srvs::ForceTorqueToolTime::Response &res);
-		// bool forceTorqueBaseTime(wam_srvs::ForceTorqueToolTime::Request &req, wam_srvs::ForceTorqueToolTime::Response &res);
+		bool forceTorqueBase(wam_srvs::ForceTorqueBase::Request &req, wam_srvs::ForceTorqueBase::Response &res);
+		bool forceTorqueTool(wam_srvs::ForceTorqueTool::Request &req, wam_srvs::ForceTorqueTool::Response &res);
+		bool forceTorqueToolTime(wam_srvs::ForceTorqueToolTime::Request &req, wam_srvs::ForceTorqueToolTime::Response &res);
+		bool forceTorqueBaseTime(wam_srvs::ForceTorqueToolTime::Request &req, wam_srvs::ForceTorqueToolTime::Response &res);
 
 
 		bool teachMotion(wam_srvs::Teach::Request &req, wam_srvs::Teach::Response &res);
 		bool playMotion(wam_srvs::Play::Request &req, wam_srvs::Play::Response &res);
 		bool linkArm(wam_srvs::Link::Request &req, wam_srvs::Link::Response &res);
 		bool unLinkArm(std_srvs::Empty::Request &req, std_srvs::Empty::Response &res);
-		// bool startVisualFix(std_srvs::Empty::Request &req, std_srvs::Empty::Response &res);
-		// bool stopVisualFix(std_srvs::Empty::Request &req, std_srvs::Empty::Response &res);
-		// bool followPath(wam_srvs::FollowPath::Request &req, wam_srvs::FollowPath::Response &res);
-		// void cartVelCB(const wam_msgs::RTCartVel::ConstPtr& msg);
-		// void ortnVelCB(const wam_msgs::RTOrtnVel::ConstPtr& msg);
-		// void jntVelCB(const wam_msgs::RTJointVel::ConstPtr& msg);
-		// void jntPosCB(const wam_msgs::RTJointPos::ConstPtr& msg);
-		// void jntHandToolCB(const sensor_msgs::JointState::ConstPtr& msg); 
-		// void cartPosCB(const wam_msgs::RTCartPos::ConstPtr& msg);
-		// void vsErrCB(const std_msgs::Float32::ConstPtr& msg);
+		bool startVisualFix(std_srvs::Empty::Request &req, std_srvs::Empty::Response &res);
+		bool stopVisualFix(std_srvs::Empty::Request &req, std_srvs::Empty::Response &res);
+		bool followPath(wam_srvs::FollowPath::Request &req, wam_srvs::FollowPath::Response &res);
+		void cartVelCB(const wam_msgs::RTCartVel::ConstPtr& msg);
+		void ortnVelCB(const wam_msgs::RTOrtnVel::ConstPtr& msg);
+		void jntVelCB(const wam_msgs::RTJointVel::ConstPtr& msg);
+		void jntPosCB(const wam_msgs::RTJointPos::ConstPtr& msg);
+		void jntHandToolCB(const sensor_msgs::JointState::ConstPtr& msg); 
+		void cartPosCB(const wam_msgs::RTCartPos::ConstPtr& msg);
+		void vsErrCB(const std_msgs::Float32::ConstPtr& msg);
 		void publishWam(ProductManager& pm);
-		// void updateRT(ProductManager& pm);
+		void updateRT(ProductManager& pm);
 	};
