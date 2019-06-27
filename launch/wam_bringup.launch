@@ -1,0 +1,6 @@
+<!-- lpetrich 17/06/19 -->
+
+<launch>
+	<node pkg="wam_bringup" type="bhand_node" name="bhand" output="screen" respawn="false"/> 
+	<node pkg="wam_bringup" type="wam_node" name="wam" output="screen" respawn="true"/> 
+</launch>
